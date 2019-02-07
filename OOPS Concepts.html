@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JS Practice</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//Creating a user class
+		class User {
+			constructor(name, email) {
+				this.name = name;
+				this.email = email;
+				this.score = 0;
+			}
+			login() {
+				console.log(this.email, 'just logged in');
+				return this; //returning this helps us in method chaining
+			}
+			logout() {
+				console.log(this.email, 'just logged out');
+				return this; //returning this again
+			}
+			nameOfUser() {
+				console.log(this.email, 'name of the email holder is', this.name);
+				return this;
+			} 
+			//A class for updating score
+			updateScore() {
+				this.score++;
+				console.log(this.email, 'score is', this.score);
+				return this;
+			}
+		}
+
+ 		//inheitance is used here to give special permissions to the Admin
+		class Admin extends User {
+			//no need to call the constructor as it would be called
+			deleteUser(user) {
+				users = users.filter(u => {
+					return u.email != user.email;
+				})
+			}
+		}
+
+		let userOne = new User('ABC', 'abc@gmail.com');
+		let userTwo = new User('XYZ', 'xyz@gmail.com');
+		let admin = new Admin('Prashant', 'prashant@email.com')//Admin class is used to create this obj
+		let users = [userOne, userTwo, admin];
+		admin.nameOfUser();
+		admin.deleteUser(userTwo);
+		console.log(users);
+	</script>
+</body>
+</html>
