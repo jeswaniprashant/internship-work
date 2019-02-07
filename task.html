@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Task</title>
+</head>
+<body>
+	<script type="text/javascript">
+		let strings;
+		
+		let arr1 = [1, 2, 
+		"Prashant", "Jeswani", 
+		{ first:
+			{ 	
+				OneOfOne: function abc(a,b) { return (a*b); }, 
+				OneOfTwo: 'Hello',
+				OneOfThree: 10 
+						} 
+					},
+		{
+			second :
+			{
+				OneOfOne: function abc(a,b) { return (a*b); }, 
+				OneOfTwo: 'Hello',
+				OneOfThree: 10 	
+			}
+		}];
+		let i, count=0;
+		let newObj = new Object();
+		let len=arr1.length;
+		let newArr=[];
+		for(i=0; i<len; i++)
+		{
+			newObj = {};
+			if(typeof arr1[i] == "number")
+			{
+				count=count+arr1[i];
+				newObj.key = arr1[i].toString();
+				newObj.count = count;
+				newArr.push(newObj);
+			}
+			else if(typeof arr1[i] == "string")
+			{
+				newObj.key=arr1[i];
+				newObj.name=arr1[i];
+				newArr.push(newObj);
+			}
+			else if (typeof arr1[i] == "object") {
+				str='';
+				myObject(arr1[i]);
+				newArr.push(str);
+			}
+			}
+			let myString = JSON.stringify(newArr, null);
+			console.log(myString);
+
+		   function myObject(obj)
+		   {
+		   	    let keys=Object.keys(obj);
+		   		str += "{";
+		   		for(let j=0;j<keys.length;j++)
+		   		{
+		   			str += '"' + keys[j] + '"';
+		   			if (typeof obj[keys[j]] == "object") {
+		   				myObject(obj[keys[j]]);
+		   			}
+		   			else{
+		   				if(j==keys.length - 1)
+		   				{
+		   					str += '"' + obj[keys[j]] + '"';	
+		   				}
+		   				else {
+		   					str += '"' + obj[keys[j]] + '"' + ',';
+		   				}
+		   			}
+		   		}
+
+		   		str += "}";
+		   }
+	</script>
+</body>
+</html>
